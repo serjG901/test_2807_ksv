@@ -1,0 +1,455 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 80vw;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.blocks {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.block {
+  width: 5%;
+  aspect-ratio: 1/1;
+  box-sizing: border-box;
+  border: 1px solid #343434;
+  background-color: transparent;
+}
+
+.active {
+  border: 1px solid white;
+}
+
+.Navy {
+  background-color: Navy;
+}
+.DarkBlue {
+  background-color: DarkBlue;
+}
+.MediumBlue {
+  background-color: MediumBlue;
+}
+.Blue {
+  background-color: Blue;
+}
+.DarkGreen {
+  background-color: DarkGreen;
+}
+.Green {
+  background-color: Green;
+}
+.Teal {
+  background-color: Teal;
+}
+.DarkCyan {
+  background-color: DarkCyan;
+}
+.DeepSkyBlue {
+  background-color: DeepSkyBlue;
+}
+.DarkTurquoise {
+  background-color: DarkTurquoise;
+}
+.MediumSpringGreen {
+  background-color: MediumSpringGreen;
+}
+.Lime {
+  background-color: Lime;
+}
+.SpringGreen {
+  background-color: SpringGreen;
+}
+.Aqua {
+  background-color: Aqua;
+}
+.Cyan {
+  background-color: Cyan;
+}
+.MidnightBlue {
+  background-color: MidnightBlue;
+}
+.DodgerBlue {
+  background-color: DodgerBlue;
+}
+.LightSeaGreen {
+  background-color: LightSeaGreen;
+}
+.ForestGreen {
+  background-color: ForestGreen;
+}
+.SeaGreen {
+  background-color: SeaGreen;
+}
+.DarkSlateGray {
+  background-color: DarkSlateGray;
+}
+.LimeGreen {
+  background-color: LimeGreen;
+}
+.MediumSeaGreen {
+  background-color: MediumSeaGreen;
+}
+.Turquoise {
+  background-color: Turquoise;
+}
+.RoyalBlue {
+  background-color: RoyalBlue;
+}
+.SteelBlue {
+  background-color: SteelBlue;
+}
+.DarkSlateBlue {
+  background-color: DarkSlateBlue;
+}
+.MediumTurquoise {
+  background-color: MediumTurquoise;
+}
+.Indigo {
+  background-color: Indigo;
+}
+.DarkOliveGreen {
+  background-color: DarkOliveGreen;
+}
+.CadetBlue {
+  background-color: CadetBlue;
+}
+.CornflowerBlue {
+  background-color: CornflowerBlue;
+}
+.MediumAquaMarine {
+  background-color: MediumAquaMarine;
+}
+.DimGray {
+  background-color: DimGray;
+}
+.SlateBlue {
+  background-color: SlateBlue;
+}
+.OliveDrab {
+  background-color: OliveDrab;
+}
+.SlateGray {
+  background-color: SlateGray;
+}
+.LightSlateGray {
+  background-color: LightSlateGray;
+}
+.MediumSlateBlue {
+  background-color: MediumSlateBlue;
+}
+.LawnGreen {
+  background-color: LawnGreen;
+}
+.Chartreuse {
+  background-color: Chartreuse;
+}
+.Aquamarine {
+  background-color: Aquamarine;
+}
+.Maroon {
+  background-color: Maroon;
+}
+.Purple {
+  background-color: Purple;
+}
+.Olive {
+  background-color: Olive;
+}
+.Gray {
+  background-color: Gray;
+}
+.SkyBlue {
+  background-color: SkyBlue;
+}
+.LightSkyBlue {
+  background-color: LightSkyBlue;
+}
+.BlueViolet {
+  background-color: BlueViolet;
+}
+.DarkRed {
+  background-color: DarkRed;
+}
+.DarkMagenta {
+  background-color: DarkMagenta;
+}
+.SaddleBrown {
+  background-color: SaddleBrown;
+}
+.DarkSeaGreen {
+  background-color: DarkSeaGreen;
+}
+.LightGreen {
+  background-color: LightGreen;
+}
+.MediumPurple {
+  background-color: MediumPurple;
+}
+.DarkViolet {
+  background-color: DarkViolet;
+}
+.PaleGreen {
+  background-color: PaleGreen;
+}
+.DarkOrchid {
+  background-color: DarkOrchid;
+}
+.YellowGreen {
+  background-color: YellowGreen;
+}
+.Sienna {
+  background-color: Sienna;
+}
+.Brown {
+  background-color: Brown;
+}
+.DarkGray {
+  background-color: DarkGray;
+}
+.LightBlue {
+  background-color: LightBlue;
+}
+.GreenYellow {
+  background-color: GreenYellow;
+}
+.PaleTurquoise {
+  background-color: PaleTurquoise;
+}
+.LightSteelBlue {
+  background-color: LightSteelBlue;
+}
+.PowderBlue {
+  background-color: PowderBlue;
+}
+.FireBrick {
+  background-color: FireBrick;
+}
+.DarkGoldenRod {
+  background-color: DarkGoldenRod;
+}
+.MediumOrchid {
+  background-color: MediumOrchid;
+}
+.RosyBrown {
+  background-color: RosyBrown;
+}
+.DarkKhaki {
+  background-color: DarkKhaki;
+}
+.Silver {
+  background-color: Silver;
+}
+.MediumVioletRed {
+  background-color: MediumVioletRed;
+}
+.IndianRed {
+  background-color: IndianRed;
+}
+.Peru {
+  background-color: Peru;
+}
+.Chocolate {
+  background-color: Chocolate;
+}
+.Tan {
+  background-color: Tan;
+}
+.LightGrey {
+  background-color: LightGrey;
+}
+.PaleVioletRed {
+  background-color: PaleVioletRed;
+}
+.Thistle {
+  background-color: Thistle;
+}
+.Orchid {
+  background-color: Orchid;
+}
+.GoldenRod {
+  background-color: GoldenRod;
+}
+.Crimson {
+  background-color: Crimson;
+}
+.Gainsboro {
+  background-color: Gainsboro;
+}
+.Plum {
+  background-color: Plum;
+}
+.BurlyWood {
+  background-color: BurlyWood;
+}
+.LightCyan {
+  background-color: LightCyan;
+}
+.Lavender {
+  background-color: Lavender;
+}
+.DarkSalmon {
+  background-color: DarkSalmon;
+}
+.Violet {
+  background-color: Violet;
+}
+.PaleGoldenRod {
+  background-color: PaleGoldenRod;
+}
+.LightCoral {
+  background-color: LightCoral;
+}
+.Khaki {
+  background-color: Khaki;
+}
+.AliceBlue {
+  background-color: AliceBlue;
+}
+.HoneyDew {
+  background-color: HoneyDew;
+}
+.Azure {
+  background-color: Azure;
+}
+.SandyBrown {
+  background-color: SandyBrown;
+}
+.Wheat {
+  background-color: Wheat;
+}
+.Beige {
+  background-color: Beige;
+}
+.WhiteSmoke {
+  background-color: WhiteSmoke;
+}
+.MintCream {
+  background-color: MintCream;
+}
+.GhostWhite {
+  background-color: GhostWhite;
+}
+.Salmon {
+  background-color: Salmon;
+}
+.AntiqueWhite {
+  background-color: AntiqueWhite;
+}
+.Linen {
+  background-color: Linen;
+}
+.LightGoldenRodYellow {
+  background-color: LightGoldenRodYellow;
+}
+.OldLace {
+  background-color: OldLace;
+}
+.Red {
+  background-color: Red;
+}
+.Fuchsia {
+  background-color: Fuchsia;
+}
+.Magenta {
+  background-color: Magenta;
+}
+.DeepPink {
+  background-color: DeepPink;
+}
+.OrangeRed {
+  background-color: OrangeRed;
+}
+.Tomato {
+  background-color: Tomato;
+}
+.HotPink {
+  background-color: HotPink;
+}
+.Coral {
+  background-color: Coral;
+}
+.Darkorange {
+  background-color: Darkorange;
+}
+.LightSalmon {
+  background-color: LightSalmon;
+}
+.Orange {
+  background-color: Orange;
+}
+.LightPink {
+  background-color: LightPink;
+}
+.Pink {
+  background-color: Pink;
+}
+.Gold {
+  background-color: Gold;
+}
+.PeachPuff {
+  background-color: PeachPuff;
+}
+.NavajoWhite {
+  background-color: NavajoWhite;
+}
+.Moccasin {
+  background-color: Moccasin;
+}
+.Bisque {
+  background-color: Bisque;
+}
+
+.MistyRose {
+  background-color: MistyRose;
+}
+.BlanchedAlmond {
+  background-color: BlanchedAlmond;
+}
+.PapayaWhip {
+  background-color: PapayaWhip;
+}
+.LavenderBlush {
+  background-color: LavenderBlush;
+}
+.SeaShell {
+  background-color: SeaShell;
+}
+.Cornsilk {
+  background-color: Cornsilk;
+}
+.FloralWhite {
+  background-color: FloralWhite;
+}
+.LemonChiffon {
+  background-color: LemonChiffon;
+}
+.Yellow {
+  background-color: Yellow;
+}
+.LightYellow {
+  background-color: LightYellow;
+}
+.Ivory {
+  background-color: Ivory;
+}
+.Snow {
+  background-color: Snow;
+}
