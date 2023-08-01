@@ -111,8 +111,8 @@ export default class FS {
         }
         addressesOfFile.push([addressOfStart, payloadTail]);
         this.freeAddresses.delete(addressOfStart);
-        console.log("parts", addressOfStart + i, lengthBlock - payloadTail);
-        this.freeAddresses.set(addressOfStart + i, lengthBlock - payloadTail);
+        console.log("parts", addressOfStart + j, lengthBlock - payloadTail);
+        this.freeAddresses.set(addressOfStart + j, lengthBlock - payloadTail);
       } else {
         let j = 0;
         while (j < lengthBlock) {
@@ -208,10 +208,11 @@ export default class FS {
   static needDefragmentstion(fs: FS) {
     let hasParts = false;
     const iterator = fs.fileRegyster.entries();
-    const item = iterator.next();
+    let item = iterator.next();
     while (!item.done && !hasParts) {
       const addresses = item.value[1];
       hasParts = addresses.length > 1;
+      item = iterator.next();
     }
     const hasFreeParts = fs.freeAddresses.size > 1;
     const firstFreePart = fs.freeAddresses.entries().next().value;
@@ -226,6 +227,35 @@ export default class FS {
 
   static defragmentation(fs: FS): FS {
     if (!FS.needDefragmentstion(fs)) return fs;
+    const sortedFileNameOfAddress = [...fs.fileRegyster].sort(
+      ([fileNameA, addressesA], [fileNameB, addressesB]) =>
+        addressesA[0][0] - addressesB[0][0]
+    );
+    const newFileRegyster = new Map();
+    const newMemory = sortedFileNameOfAddress
+      .map(([fileName, addresses]) => {
+        const reducePayload = addresses
+          .map((x) => fs.memory.slice(x[0], x[1]))
+          .flat(1);
+        const reduceAddress = addresses.reduce((acc, x) => [
+          acc[0],
+          (acc[1] += x[1]),
+        ]);
+        newFileRegyster.set(fileName, reduceAddress);
+        return reducePayload;
+      })
+      .flat(1);
+    fs.fileRegyster.clear;
+    fs.fileRegyster = new Map(newFileRegyster);
+    fs.memory = newMemory;
+    fs.freeAddresses.clear;
+    fs.freeMemory = 0;
+    const nullIndex = newMemory.findIndex((x) => x === null);
+    if (nullIndex !== -1) {
+      const newFreeMemory = newMemory.length - nullIndex;
+      fs.freeMemory = newFreeMemory;
+      fs.freeAddresses.set(nullIndex, newFreeMemory);
+    }
     return fs;
   }
 }

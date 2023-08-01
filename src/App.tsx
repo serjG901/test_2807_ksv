@@ -7,7 +7,7 @@ import Block from "./Block";
 type TBit = number | null;
 type TMemory = TBit[];
 
-const fs = new FS(100, 20);
+let fs = new FS(100, 20);
 
 export default function App() {
   const [state, setState] = useState<TMemory>(fs.memory);
@@ -33,6 +33,11 @@ export default function App() {
       setStateOfActive((s) => [...s, color]);
     }
   };
+  const handleDefrag = () => {
+    fs = FS.defragmentation(fs);
+    console.log(fs);
+    setState([...fs.memory]);
+  };
   return (
     <div className="app">
       <Input files={fs.fileRegyster} handleAdd={handleAdd} />
@@ -48,6 +53,7 @@ export default function App() {
           />
         ))}
       </div>
+      <button onClick={handleDefrag}>Defragmentation</button>
     </div>
   );
 }
