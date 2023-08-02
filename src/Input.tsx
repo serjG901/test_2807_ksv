@@ -11,7 +11,7 @@ interface IInput {
 export default function Input({ files, handleAdd }: IInput) {
   const inputRef = useRef<HTMLInputElement>(null);
   const handleSave = (sizeFromButton = 0) => {
-    const size = sizeFromButton || inputRef.current?.value || 0;
+    const size = sizeFromButton || +inputRef.current?.value || 0;
     size = size < 1 ? 0 : size;
     if (size) {
       let randomColor = colors[Math.trunc(Math.random() * colors.length)];
