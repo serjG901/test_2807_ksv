@@ -10,8 +10,8 @@ interface IInput {
 
 export default function Input({ files, handleAdd }: IInput) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const handleSave = () => {
-    const size = inputRef.current?.value || 0;
+  const handleSave = (sizeFromButton = 0) => {
+    const size = sizeFromButton || inputRef.current?.value || 0;
     if (size) {
       let randomColor = colors[Math.trunc(Math.random() * colors.length)];
       while (files.has(randomColor)) {
@@ -23,6 +23,7 @@ export default function Input({ files, handleAdd }: IInput) {
   return (
     <div className="field">
       <div>Enter size new block</div>
+      <div className="buttons">{Array(10).fill(null).map((_,i) => (<button onClick={() => handleSave(i)}>{i}</button>))}</div>
       <input
         type="number"
         ref={inputRef}
