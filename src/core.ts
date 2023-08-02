@@ -234,21 +234,28 @@ export default class FS {
     const newFileRegyster = new Map();
     const newMemory = sortedFileNameOfAddress
       .map(([fileName, addresses]) => {
+        console.log('map');
+        console.log(fileName, addresses);
         const reducePayload = addresses
-          .map((x) => fs.memory.slice(x[0], x[1]))
+          .map((x) => fs.memory.slice(x[0], x[0] + x[1]))
           .flat(1);
         const reduceAddress = addresses.reduce((acc, x) => [
           acc[0],
           (acc[1] += x[1]),
         ]);
-        console.log(reducePayload,reduceAddress);
+        console.log('reduce', fileName, reducePayload,reduceAddress);
         newFileRegyster.set(fileName, reduceAddress);
         return reducePayload;
       })
       .flat(1);
+      console.log('defrag');
+      console.log(sortedFileNameOfAddress);
+      console.log(newMemory);
+      console.log(newFileRegyster);console.log('defrag');
     fs.fileRegyster.clear;
-    console.log(newFileRegyster);
     fs.fileRegyster = new Map(newFileRegyster);
+    const nullArray = Array(fs.memory.length - newMemory.length).fill(null);
+    newMemory.push(...nullArray);
     fs.memory = newMemory;
     fs.freeAddresses.clear;
     fs.freeMemory = 0;
