@@ -25,6 +25,7 @@
   box-sizing: border-box;
   justify-content: center;
   width: 100%;
+  gap: 8px;
 }
 
 .blocks {
