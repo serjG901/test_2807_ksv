@@ -18,7 +18,7 @@ export default function Input({ files, handleAdd }: IInput) {
       while (files.has(randomColor)) {
         randomColor = colors[Math.trunc(Math.random() * colors.length)];
       }
-      handleAdd(randomColor, getPayload(+size));
+      handleAdd(randomColor, getPayload(size));
     }
   };
   return (
