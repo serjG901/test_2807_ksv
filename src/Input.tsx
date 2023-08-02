@@ -35,6 +35,8 @@ export default function Input({ files, handleAdd }: IInput) {
         ref={inputRef}
         required
         placeholder="5 or 9 and etc."
+        min="1"
+        max="100"
       />
       <button onClick={() => handleSave()}>Save</button>
     </div>
