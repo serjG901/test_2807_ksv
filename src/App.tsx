@@ -7,7 +7,7 @@ import Block from "./Block";
 type TBit = number | null;
 type TMemory = TBit[];
 
-let fs = new FS(100, 20);
+const fs = new FS(10, 10);
 
 export default function App() {
   const [state, setState] = useState<TMemory>(fs.memory);
@@ -34,7 +34,7 @@ export default function App() {
     }
   };
   const handleDefrag = () => {
-    fs = FS.defragmentation(fs);
+    FS.defragmentation(fs);
     console.log(fs);
     setState([...fs.memory]);
   };

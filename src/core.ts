@@ -215,9 +215,9 @@ export default class FS {
       item = iterator.next();
     }
     const hasFreeParts = fs.freeAddresses.size > 1;
-    const firstFreePart = fs.freeAddresses.entries().next().value;
+    const firstFreePart = fs.freeAddresses.entries().next().value || [0,0];
     const addressFirstFreePart = firstFreePart[0];
-    const lengthFirstFreePart = firstFreePart[0];
+    const lengthFirstFreePart = firstFreePart[1];
     const endFirstFreePart = addressFirstFreePart + lengthFirstFreePart;
     const firstFreePartIsLastPartOfMemory = endFirstFreePart === fs.maxLength;
     if (!hasParts && !hasFreeParts && firstFreePartIsLastPartOfMemory)
@@ -241,11 +241,13 @@ export default class FS {
           acc[0],
           (acc[1] += x[1]),
         ]);
+        console.log(reducePayload,reduceAddress);
         newFileRegyster.set(fileName, reduceAddress);
         return reducePayload;
       })
       .flat(1);
     fs.fileRegyster.clear;
+    console.log(newFileRegyster);
     fs.fileRegyster = new Map(newFileRegyster);
     fs.memory = newMemory;
     fs.freeAddresses.clear;
