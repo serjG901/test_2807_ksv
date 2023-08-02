@@ -223,7 +223,7 @@ export default class FS {
   static defragmentation(fs: FS): TMemory {
     if (!FS.needDefragmentstion(fs)) return fs.memory;
     const sortedFileNameOfAddress = [...fs.fileRegyster].sort(
-      ([fileNameA, addressesA], [fileNameB, addressesB]) =>
+      ([_fileNameA, addressesA], [_fileNameB, addressesB]) =>
         addressesA[0][0] - addressesB[0][0]
     );
     const newFileRegyster = new Map();
