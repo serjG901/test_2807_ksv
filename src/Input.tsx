@@ -30,7 +30,7 @@ export default function Input({ files, handleAdd }: IInput) {
         required
         placeholder="5 or 9 and etc."
       />
-      <button onClick={handleSave}>Save</button>
+      <button onClick={() => handleSave()}>Save</button>
     </div>
   );
 }
