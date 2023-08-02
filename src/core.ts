@@ -53,9 +53,7 @@ export default class FS {
         this.saveOnParts(payload, fileName);
       }
     }
-    console.log(this.freeAddresses);
     this.freeAddresses = FS.concatNearFreeAddresses(this.freeAddresses);
-    console.log(this.freeAddresses);
     return this.memory;
   }
 
@@ -111,7 +109,6 @@ export default class FS {
         }
         addressesOfFile.push([addressOfStart, payloadTail]);
         this.freeAddresses.delete(addressOfStart);
-        console.log("parts", addressOfStart + j, lengthBlock - payloadTail);
         this.freeAddresses.set(addressOfStart + j, lengthBlock - payloadTail);
       } else {
         let j = 0;
@@ -153,9 +150,7 @@ export default class FS {
         }
       });
     }
-    console.log(this.freeAddresses);
     this.freeAddresses = FS.concatNearFreeAddresses(this.freeAddresses);
-    console.log(this.freeAddresses);
     return this.memory;
   }
 
@@ -165,11 +160,11 @@ export default class FS {
     let item = iterator.next();
     let fileName = "";
     while (!item.done && !fileName) {
-      const [file, adressed] = item.value;
-      const findedIndex = adressed.findIndex(
+      const [file, addressed] = item.value;
+      const findedIndex = addressed.findIndex(
         ([startAddressPart, lengthBlock]) => {
           const endAddressPart = startAddressPart + lengthBlock;
-          return index >= startAddressPart && index < endAddressPart;
+          return (index >= startAddressPart) && (index < endAddressPart);
         }
       );
       if (findedIndex !== -1) fileName = file;
@@ -215,7 +210,7 @@ export default class FS {
       item = iterator.next();
     }
     const hasFreeParts = fs.freeAddresses.size > 1;
-    const firstFreePart = fs.freeAddresses.entries().next().value || [0,0];
+    const firstFreePart = fs.freeAddresses.entries().next().value || [0,fs.maxLength];
     const addressFirstFreePart = firstFreePart[0];
     const lengthFirstFreePart = firstFreePart[1];
     const endFirstFreePart = addressFirstFreePart + lengthFirstFreePart;
@@ -225,17 +220,16 @@ export default class FS {
     return true;
   }
 
-  static defragmentation(fs: FS): FS {
-    if (!FS.needDefragmentstion(fs)) return fs;
+  static defragmentation(fs: FS): TMemory {
+    if (!FS.needDefragmentstion(fs)) return fs.memory;
     const sortedFileNameOfAddress = [...fs.fileRegyster].sort(
       ([fileNameA, addressesA], [fileNameB, addressesB]) =>
         addressesA[0][0] - addressesB[0][0]
     );
     const newFileRegyster = new Map();
+    let newStartAddress = 0;
     const newMemory = sortedFileNameOfAddress
       .map(([fileName, addresses]) => {
-        console.log('map');
-        console.log(fileName, addresses);
         const reducePayload = addresses
           .map((x) => fs.memory.slice(x[0], x[0] + x[1]))
           .flat(1);
@@ -243,21 +237,17 @@ export default class FS {
           acc[0],
           (acc[1] += x[1]),
         ]);
-        console.log('reduce', fileName, reducePayload,reduceAddress);
-        newFileRegyster.set(fileName, reduceAddress);
+        newFileRegyster.set(fileName, [[newStartAddress, reduceAddress[1]]]);
+        newStartAddress += reduceAddress[1]
         return reducePayload;
       })
       .flat(1);
-      console.log('defrag');
-      console.log(sortedFileNameOfAddress);
-      console.log(newMemory);
-      console.log(newFileRegyster);console.log('defrag');
-    fs.fileRegyster.clear;
-    fs.fileRegyster = new Map(newFileRegyster);
+    fs.fileRegyster.clear();
+    fs.fileRegyster = newFileRegyster;
     const nullArray = Array(fs.memory.length - newMemory.length).fill(null);
     newMemory.push(...nullArray);
     fs.memory = newMemory;
-    fs.freeAddresses.clear;
+    fs.freeAddresses.clear();
     fs.freeMemory = 0;
     const nullIndex = newMemory.findIndex((x) => x === null);
     if (nullIndex !== -1) {
@@ -265,6 +255,6 @@ export default class FS {
       fs.freeMemory = newFreeMemory;
       fs.freeAddresses.set(nullIndex, newFreeMemory);
     }
-    return fs;
+    return fs.memory;
   }
 }
