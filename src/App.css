@@ -20,6 +20,13 @@
   gap: 4px;
 }
 
+.buttons {
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+  width: 100%;
+}
+
 .blocks {
   display: flex;
   box-sizing: border-box;
