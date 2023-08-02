@@ -5,5 +5,5 @@
 
  logic based on FS class (in core.ts)
 
- deploy
+ deploy: 
  https://serjg901.github.io/test_2807_ksv/
