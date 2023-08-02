@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import colors from "./colors";
 
-const getPayload = (size: number, color: string) => Array(+size).fill(color);
+const getPayload = (size: number) => Array(+size).fill(Math.round(Math.random()));
 
 interface IInput {
   files: Map<string, [number, number][]>;
@@ -17,7 +17,7 @@ export default function Input({ files, handleAdd }: IInput) {
       while (files.has(randomColor)) {
         randomColor = colors[Math.trunc(Math.random() * colors.length)];
       }
-      handleAdd(randomColor, getPayload(+size, randomColor));
+      handleAdd(randomColor, getPayload(+size));
     }
   };
   return (
