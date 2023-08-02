@@ -23,7 +23,13 @@ export default function Input({ files, handleAdd }: IInput) {
   return (
     <div className="field">
       <div>Enter size new block</div>
-      <div className="buttons">{Array(10).fill(null).map((_,i) => (<button onClick={() => handleSave(i)}>{i}</button>))}</div>
+      <div className="buttons">{Array(10).fill(null).map((_,i) => (
+      <button 
+        onClick={() => handleSave(i%2 ? (i+1)*2 : (i+1)*2+1)}
+        >
+        {i%2 ? (i+1)*2 : (i+1)*2+1}
+      </button>))}
+      </div>
       <input
         type="number"
         ref={inputRef}
