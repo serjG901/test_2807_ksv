@@ -34,7 +34,7 @@ export default function Input({ files, handleAdd }: IInput) {
         type="number"
         ref={inputRef}
         required
-        placeholder="5 or 9 and etc."
+        placeholder="size"
         min="1"
         max="100"
       />
