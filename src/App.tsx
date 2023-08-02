@@ -7,7 +7,7 @@ import Block from "./Block";
 type TBit = number | null;
 type TMemory = TBit[];
 
-const fs = new FS(10, 10);
+const fs = new FS(100, 10);
 
 export default function App() {
   const [state, setState] = useState<TMemory>(fs.memory);
@@ -34,9 +34,8 @@ export default function App() {
     }
   };
   const handleDefrag = () => {
-    FS.defragmentation(fs);
-    console.log(fs);
-    setState([...fs.memory]);
+    const newState = FS.defragmentation(fs);
+    setState([...newState]);
   };
   return (
     <div className="app">
@@ -50,8 +49,8 @@ export default function App() {
             handleDelete={handleDelete}
             active={stateOfActive}
             handleSetActive={handleSetActive}
-          />
-        ))}
+          />)
+          )}
       </div>
       <button onClick={handleDefrag}>Defragmentation</button>
     </div>
